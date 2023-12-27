@@ -20,7 +20,8 @@
         color="#EF2D5E"
         segments-height="20"
         dynamic-body
-        material="hardwood2_roughness.jpg">
+        velocity="0 0 0"
+        material="hardwood2_roughness.jpg)">
       </a-sphere>
 
       <!-- Похила площина -->
@@ -30,7 +31,9 @@
         width="5"
         height="5"
         color="#7BC8A4"
-        static-body>
+        static-body
+        dynamic-body
+        material="water.jpg)">
       </a-plane>
     </a-marker>
   </a-scene>
@@ -42,7 +45,7 @@
       },
       handleCollision: function (event) {
         // Обробка удару, наприклад, анімація чи зміна колірної текстури
-        this.el.setAttribute('animation', 'property: position; to: 0 1.25 -2; dur: 1000; easing: easeOutElastic');
+        this.el.setAttribute('velocity', { x: 0, y: 5, z: 0 });
       }
     });
 
