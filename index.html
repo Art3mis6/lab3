@@ -45,7 +45,7 @@
       },
       handleCollision: function (event) {
         // Обробка удару, наприклад, анімація чи зміна колірної текстури
-        this.el.setAttribute('velocity', { x: 0, y: 5, z: 0 });
+        this.el.body.velocity.y = 5
       }
     });
 
