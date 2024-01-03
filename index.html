@@ -1,15 +1,15 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.3.3/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/3.1.2/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
   <a-scene embedded arjs="trackingMethod: best;">
     <!-- Маркер -->
-    <a-marker preset="custom" type="pattern" url="https://github.com/Art3mis6/lab3/blob/main/marker.patt">
+    <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/Art3mis6/lab3/main/marker.patt">
       <!-- Камера для доповненої реальності -->
       <a-entity camera></a-entity>
 
@@ -21,7 +21,7 @@
         segments-height="20"
         dynamic-body
         velocity="0 0 0"
-        material="src: url(https://github.com/Art3mis6/lab3/blob/main/hardwood2_roughness.jpg)">
+        material="src: url(https://raw.githubusercontent.com/Art3mis6/lab3/main/hardwood2_roughness.jpg)">
       </a-sphere>
 
       <!-- Похила площина -->
@@ -33,7 +33,7 @@
         color="#7BC8A4"
         static-body
         dynamic-body
-        material="src: url(https://github.com/Art3mis6/lab3/blob/main/water.jpg)">
+        material="src: url(https://raw.githubusercontent.com/Art3mis6/lab3/main/water.jpg)">
       </a-plane>
     </a-marker>
   </a-scene>
