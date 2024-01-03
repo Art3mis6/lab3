@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
- <a-scene embedded arjs="trackingMethod: best;">
+  <a-scene embedded arjs="trackingMethod: best;">
+    <!-- Маркер -->
     <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/Art3mis6/lab3/main/marker.patt">
-       <a-entity camera></a-entity>
+      <!-- Камера для доповненої реальності -->
+      <a-entity camera></a-entity>
 
+      <!-- Гумова кулька -->
       <a-sphere
-    position="0 1.25 0"
-    radius="1"
-    color="#EF2D5E"
-    segments-height="20"
-    dynamic-body
-    velocity="0 0 0"
-    material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/hardwood2_roughness.jpg">
-   </a-sphere>
+        position="0 1.25 -2"
+        radius="0.1" <!-- Змінено радіус на менше значення -->
+        color="#EF2D5E"
+        segments-height="20"
+        dynamic-body
+        velocity="0 0 0"
+        material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/hardwood2_roughness.jpg">
+      </a-sphere>
 
+      <!-- Похила площина -->
       <a-plane
-    position="0 0 0"
-    rotation="-45 0 0"
-    width="5"
-    height="5"
-    color="#7BC8A4"
-    static-body
-    dynamic-body
-    material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/water.jpg">
-   </a-plane>
- </a-scene>
+        position="0 0 0"
+        rotation="-45 0 0"
+        width="5"
+        height="5"
+        color="#7BC8A4"
+        static-body
+        dynamic-body
+        material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/water.jpg">
+      </a-plane>
+    </a-marker>
+  </a-scene>
 
- <script>
-  AFRAME.registerComponent('dynamic-body', {
-   init: function () {
-    this.el.addEventListener('collide', this.handleCollision.bind(this));
-   },
-   handleCollision: function (event) {
-    // Обробка удару, наприклад, анімація чи зміна колірної текстури
-    this.el.setAttribute('velocity', { x: 0, y: 5, z: 0 });
-   }
-  });
-
-  AFRAME.registerComponent('move-along-slope', {
-   tick: function () {
-    // Рух камери вздовж похилої площини
-    var slope = 45; // Кут нахилу площини
-    var speed = 0.01; // Швидкість руху
-
-    var position = this.el.getAttribute('position');
-    position.x += speed * Math.cos(THREE.Math.degToRad(slope));
-    position.z += speed * Math.sin(THREE.Math.degToRad(slope));
-    this.el.setAttribute('position', position);
-   }
-  });
- </script>
+  <script>
+    AFRAME.registerComponent('dynamic-body', {
+      init: function () {
+        this.el.addEventListener('collide', this.handleCollision.bind(this));
+      },
+      handleCollision: function (event) {
+        // Обробка удару, наприклад, анімація чи зміна колірної текстури
+        this.el.setAttribute('velocity', { x: 0, y: 5, z: 0 });
+      },
+      tick: function () {
+        // Перевірка позиції кулі по осі Z
+        var position = this.el.getAttribute('position');
+        if (position.z >= 0) {
+          // Зміна позиції, якщо потрібно
+          position.z = -0.1;  // Наприклад, встановлення мінімальної позиції
+          this.el.setAttribute('position', position);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
