@@ -16,7 +16,7 @@
       <!-- Гумова кулька -->
       <a-sphere
         position="0 1.25 -2"
-        radius="0.1" <!-- Змінено радіус на менше значення -->
+        radius="2"
         color="#EF2D5E"
         segments-height="20"
         dynamic-body
@@ -51,8 +51,8 @@
         // Перевірка позиції кулі по осі Z
         var position = this.el.getAttribute('position');
         if (position.z >= 0) {
-          // Зміна позиції, якщо потрібно
-          position.z = -0.1;  // Наприклад, встановлення мінімальної позиції
+          // Зміна позиції
+          position.z = -0.1; 
           this.el.setAttribute('position', position);
         }
       }
