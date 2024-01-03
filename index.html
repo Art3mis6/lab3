@@ -11,12 +11,12 @@
     <!-- Маркер -->
     <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/Art3mis6/lab3/main/marker.patt">
       <!-- Камера для доповненої реальності -->
-      <a-entity camera></a-entity>
+      <a-entity camera look-controls="enabled: false;" move-along-slope></a-entity>
 
       <!-- Гумова кулька -->
       <a-sphere
-        position="0 1.25 -2"
-        radius="0.4"
+        position="0 1.25 0"
+        radius="1"
         color="#EF2D5E"
         segments-height="20"
         dynamic-body
@@ -46,15 +46,19 @@
       handleCollision: function (event) {
         // Обробка удару, наприклад, анімація чи зміна колірної текстури
         this.el.setAttribute('velocity', { x: 0, y: 5, z: 0 });
-      },
+      }
+    });
+
+    AFRAME.registerComponent('move-along-slope', {
       tick: function () {
-        // Перевірка позиції кулі по осі Z
+        // Рух камери вздовж похилої площини
+        var slope = 45; // Кут нахилу площини
+        var speed = 0.01; // Швидкість руху
+
         var position = this.el.getAttribute('position');
-        if (position.z >= 0) {
-          // Зміна позиції
-          position.z = -0.1; 
-          this.el.setAttribute('position', position);
-        }
+        position.x += speed * Math.cos(THREE.Math.degToRad(slope));
+        position.z += speed * Math.sin(THREE.Math.degToRad(slope));
+        this.el.setAttribute('position', position);
       }
     });
   </script>
