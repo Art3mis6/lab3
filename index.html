@@ -11,7 +11,7 @@
     <!-- Маркер -->
     <a-marker preset="custom" type="pattern" url="marker.patt">
       <!-- Камера для доповненої реальності -->
-      <a-entity camera look-controls="enabled: false;" userHeight="0"></a-entity>
+      <a-entity camera look-controls userHeight="0" camera-check></a-entity>
 
       <!-- Гумова кулька -->
       <a-sphere
@@ -39,6 +39,23 @@
   </a-scene>
 
   <script>
+    AFRAME.registerComponent('camera-check', {
+      init: function () {
+        var el = this.el;
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function (stream) {
+            // Камера працює
+            console.log('Camera is accessible');
+            el.emit('camera-accessible');
+          })
+          .catch(function (error) {
+            // Помилка камери
+            console.error('Camera not accessible', error);
+            el.emit('camera-not-accessible');
+          });
+      }
+    });
+
     AFRAME.registerComponent('dynamic-body', {
       init: function () {
         this.el.addEventListener('collide', this.handleCollision.bind(this));
