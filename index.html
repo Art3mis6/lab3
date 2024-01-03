@@ -21,7 +21,7 @@
         segments-height="20"
         dynamic-body
         velocity="0 0 0"
-        material="src: url(https://raw.githubusercontent.com/Art3mis6/lab3/main/hardwood2_roughness.jpg)">
+        material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/hardwood2_roughness.jpg">
       </a-sphere>
 
       <!-- Похила площина -->
@@ -33,7 +33,7 @@
         color="#7BC8A4"
         static-body
         dynamic-body
-        material="src: url(https://raw.githubusercontent.com/Art3mis6/lab3/main/water.jpg)">
+        material="src: https://raw.githubusercontent.com/Art3mis6/lab3/main/water.jpg">
       </a-plane>
     </a-marker>
   </a-scene>
@@ -56,7 +56,8 @@
         var speed = 0.01; // Швидкість руху
 
         var position = this.el.getAttribute('position');
-        position.y = 1.25 + Math.sin(Date.now() * speed) * 0.5; // Змініть це, щоб контролювати висоту
+        position.x += speed * Math.cos(THREE.Math.degToRad(slope));
+        position.z += speed * Math.sin(THREE.Math.degToRad(slope));
         this.el.setAttribute('position', position);
       }
     });
