@@ -11,7 +11,7 @@
     <!-- Маркер -->
     <a-marker preset="custom" type="pattern" url="marker.patt" userHeight="0">
       <!-- Камера для доповненої реальності -->
-      <a-entity camera look-controls></a-entity>
+      <a-entity camera look-controls="enabled: false;"></a-entity> <!-- Використовуйте enabled: false для вимкнення вбудованих look controls -->
 
       <!-- Гумова кулька -->
       <a-sphere
