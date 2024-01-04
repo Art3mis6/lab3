@@ -9,9 +9,9 @@
   <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.physics.min.js"></script>
 </head>
 <body>
-  <a-scene embedded arjs="trackingMethod: best;" physics="debug: true; driver: cannon">
+  <a-scene embedded arjs="trackingMethod: best;" physics="debug: true; driver: cannon" loaded="true">
     <!-- Маркер -->
-    <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/Art3mis6/lab3/main/marker.patt">
+    <a-marker preset="custom" type="pattern" url="https://raw.githubusercontent.com/Art3mis6/lab3/main/marker.patt" marker-handler>
       <!-- Камера для доповненої реальності -->
       <a-entity camera look-controls userHeight="0" rotation="-45 0 0" camera-check></a-entity>
 
@@ -65,6 +65,19 @@
       handleCollision: function (event) {
         // Обробка удару
         this.el.body.velocity.y = 5;
+      }
+    });
+
+    AFRAME.registerComponent('marker-handler', {
+      init: function () {
+        this.el.addEventListener('markerFound', this.handleMarkerFound.bind(this));
+        this.el.addEventListener('markerLost', this.handleMarkerLost.bind(this));
+      },
+      handleMarkerFound: function () {
+        console.log('Marker Found!');
+      },
+      handleMarkerLost: function () {
+        console.log('Marker Lost!');
       }
     });
   </script>
